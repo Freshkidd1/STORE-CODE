@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DarkStore - Shop</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="dark-theme">
+
+  <!-- Navigation -->
+  <header>
+    <div class="container nav">
+      <h1 class="logo">DarkStore</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="shop.html" class="active">Shop</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="cart.html">Cart 🛒</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Filter Buttons -->
+  <section class="container filter-section">
+    <h2>All Products</h2>
+    <div class="filters">
+      <button onclick="filterProducts('all')" class="btn">All</button>
+      <button onclick="filterProducts('clothing')" class="btn">Clothing</button>
+      <button onclick="filterProducts('electronics')" class="btn">Electronics</button>
+      <button onclick="filterProducts('books')" class="btn">Books</button>
+      <button onclick="filterProducts('shoes')" class="btn">Shoes</button>
+      <button onclick="filterProducts('accessories')" class="btn">Accessories</button>
+    </div>
+  </section>
+
+  <!-- Product Grid -->
+  <section class="container product-grid" id="productGrid">
+    <!-- 20 Products -->
+    <!-- Category is in data-category attribute -->
+    <!-- We'll loop them in JS or hardcode for now -->
+    <script>
+      const categories = ['clothing', 'electronics', 'books', 'shoes', 'accessories'];
+      let productHTML = '';
+      for (let i = 1; i <= 20; i++) {
+        const category = categories[Math.floor((i - 1) / 4)];
+        productHTML += `
+          <div class="product-card" data-category="${category}">
+            <img src="images/product${i}.jpg" alt="Product ${i}" />
+            <h4>Product ${i}</h4>
+            <p>$${(Math.random() * 100 + 10).toFixed(2)}</p>
+            <button onclick="addToCart('Product ${i}')">Add to Cart</button>
+          </div>
+        `;
+      }
+      document.write(productHTML);
+    </script>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 DarkStore. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
