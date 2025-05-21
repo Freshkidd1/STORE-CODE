@@ -3,19 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>DarkStore - Home</title>
+  <title>DarkStore - Shop</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body class="dark-theme">
 
-  <!-- Navigation -->
+  <!-- Header / Navigation -->
   <header>
     <div class="container nav">
       <h1 class="logo">DarkStore</h1>
       <nav>
         <ul>
-          <li><a href="index.html" class="active">Home</a></li>
-          <li><a href="shop.html">Shop</a></li>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="shop.html" class="active">Shop</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="contact.html">Contact</a></li>
           <li><a href="cart.html">Cart 🛒</a></li>
@@ -24,52 +24,22 @@
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="container">
-      <h2>Welcome to DarkStore</h2>
-      <p>Discover stylish gear for a bold lifestyle.</p>
-      <a href="shop.html" class="btn">Shop Now</a>
+  <!-- Product Filters -->
+  <section class="container filter-section">
+    <h2>Browse Our Products</h2>
+    <div class="filters">
+      <button onclick="filterProducts('all')" class="btn">All</button>
+      <button onclick="filterProducts('clothing')" class="btn">Clothing</button>
+      <button onclick="filterProducts('electronics')" class="btn">Electronics</button>
+      <button onclick="filterProducts('books')" class="btn">Books</button>
+      <button onclick="filterProducts('shoes')" class="btn">Shoes</button>
+      <button onclick="filterProducts('accessories')" class="btn">Accessories</button>
     </div>
   </section>
 
-  <!-- Categories -->
-  <section class="categories container">
-    <h3>Shop by Category</h3>
-    <div class="category-grid">
-      <div class="category-card">Clothing</div>
-      <div class="category-card">Electronics</div>
-      <div class="category-card">Books</div>
-      <div class="category-card">Shoes</div>
-      <div class="category-card">Accessories</div>
-    </div>
-  </section>
-
-  <!-- Featured Products -->
-  <section class="featured container">
-    <h3>Featured Products</h3>
-    <div class="product-grid">
-      <div class="product-card">
-        <img src="images/product1.jpg" alt="Product 1" />
-        <h4>Product Name</h4>
-        <p>$29.99</p>
-      </div>
-      <div class="product-card">
-        <img src="images/product2.jpg" alt="Product 2" />
-        <h4>Product Name</h4>
-        <p>$59.99</p>
-      </div>
-      <div class="product-card">
-        <img src="images/product3.jpg" alt="Product 3" />
-        <h4>Product Name</h4>
-        <p>$19.99</p>
-      </div>
-      <div class="product-card">
-        <img src="images/product4.jpg" alt="Product 4" />
-        <h4>Product Name</h4>
-        <p>$49.99</p>
-      </div>
-    </div>
+  <!-- Product Grid -->
+  <section class="container product-grid" id="productGrid">
+    <!-- Product cards will be inserted here -->
   </section>
 
   <!-- Footer -->
@@ -78,6 +48,45 @@
       <p>&copy; 2025 DarkStore. All rights reserved.</p>
     </div>
   </footer>
+
+  <!-- JavaScript for Dynamic Content -->
+  <script>
+    const categories = ['clothing', 'electronics', 'books', 'shoes', 'accessories'];
+    const productGrid = document.getElementById('productGrid');
+
+    // Generate product cards
+    for (let i = 1; i <= 20; i++) {
+      const category = categories[Math.floor((i - 1) / 4)];
+      const price = (Math.random() * 100 + 10).toFixed(2);
+
+      const productCard = document.createElement('div');
+      productCard.className = 'product-card';
+      productCard.setAttribute('data-category', category);
+
+      productCard.innerHTML = `
+        <img src="images/product${i}.jpg" alt="Product ${i}" onerror="this.src='images/placeholder.jpg'"/>
+        <h4>Product ${i}</h4>
+        <p>$${price}</p>
+        <button onclick="addToCart('Product ${i}')">Add to Cart</button>
+      `;
+
+      productGrid.appendChild(productCard);
+    }
+
+    // Filter products by category
+    function filterProducts(category) {
+      const cards = document.querySelectorAll('.product-card');
+      cards.forEach(card => {
+        const isMatch = card.dataset.category === category || category === 'all';
+        card.style.display = isMatch ? 'block' : 'none';
+      });
+    }
+
+    // Add to cart (simple version)
+    function addToCart(productName) {
+      alert(`${productName} added to cart!`);
+    }
+  </script>
 
 </body>
 </html>

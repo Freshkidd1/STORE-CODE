@@ -8,7 +8,7 @@
 </head>
 <body class="dark-theme">
 
-  <!-- 🧭 Header / Navigation -->
+  <!-- Header / Navigation -->
   <header>
     <div class="container nav">
       <h1 class="logo">DarkStore</h1>
@@ -24,15 +24,9 @@
     </div>
   </header>
 
-  <!-- 🎯 Optional Hero / Welcome Message -->
-  <section class="container hero-section">
-    <h2>Welcome to the DarkStore</h2>
-    <p>Browse high-quality products across clothing, electronics, books, and more.</p>
-  </section>
-
-  <!-- 🧰 Filter Controls -->
+  <!-- Product Filters -->
   <section class="container filter-section">
-    <h3>Filter by Category</h3>
+    <h2>Browse Our Products</h2>
     <div class="filters">
       <button onclick="filterProducts('all')" class="btn">All</button>
       <button onclick="filterProducts('clothing')" class="btn">Clothing</button>
@@ -43,56 +37,56 @@
     </div>
   </section>
 
-  <!-- 🛍️ Product Listing Grid -->
+  <!-- Product Grid -->
   <section class="container product-grid" id="productGrid">
-    <!-- JS inserts product cards here -->
+    <!-- Product cards will be inserted here -->
   </section>
 
-  <!-- 📦 Floating Cart (optional) -->
-  <!-- <div class="floating-cart">
-    <a href="cart.html">🛒 View Cart</a>
-  </div> -->
-
-  <!-- 📞 Footer -->
+  <!-- Footer -->
   <footer>
     <div class="container">
       <p>&copy; 2025 DarkStore. All rights reserved.</p>
     </div>
   </footer>
 
-  <!-- 📜 JavaScript Logic -->
+  <!-- JavaScript for Dynamic Content -->
   <script>
     const categories = ['clothing', 'electronics', 'books', 'shoes', 'accessories'];
     const productGrid = document.getElementById('productGrid');
 
-    // Generate 20 products
+    // Generate product cards
     for (let i = 1; i <= 20; i++) {
       const category = categories[Math.floor((i - 1) / 4)];
+      const price = (Math.random() * 100 + 10).toFixed(2);
+
       const productCard = document.createElement('div');
-      productCard.classList.add('product-card');
-      productCard.dataset.category = category;
+      productCard.className = 'product-card';
+      productCard.setAttribute('data-category', category);
 
       productCard.innerHTML = `
-        <img src="images/product${i}.jpg" alt="Product ${i}" onerror="this.src='images/placeholder.jpg'" />
+        <img src="images/product${i}.jpg" alt="Product ${i}" onerror="this.src='images/placeholder.jpg'"/>
         <h4>Product ${i}</h4>
-        <p>$${(Math.random() * 100 + 10).toFixed(2)}</p>
+        <p>$${price}</p>
         <button onclick="addToCart('Product ${i}')">Add to Cart</button>
       `;
 
       productGrid.appendChild(productCard);
     }
 
+    // Filter products by category
     function filterProducts(category) {
       const cards = document.querySelectorAll('.product-card');
       cards.forEach(card => {
-        const match = category === 'all' || card.dataset.category === category;
-        card.style.display = match ? 'block' : 'none';
+        const isMatch = card.dataset.category === category || category === 'all';
+        card.style.display = isMatch ? 'block' : 'none';
       });
     }
 
+    // Add to cart (simple version)
     function addToCart(productName) {
       alert(`${productName} added to cart!`);
     }
   </script>
+
 </body>
 </html>

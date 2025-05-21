@@ -86,7 +86,9 @@
     margin-top: 1rem;
   }
   
-  .category-card,
+  .category-card{
+    margin-right: 8px;
+  }
   .product-card {
     background: #1a1a1a;
     padding: 1rem;
@@ -148,4 +150,76 @@
   .product-card button:hover {
     background: #ccc;
   }
+
+  /* Theme toggle button */
+#theme-toggle {
+  background: none;
+  border: none;
+  color: #f39c12;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  margin-left: 1rem;
+}
+
+#theme-toggle:hover {
+  transform: scale(1.1);
+}
+
+/* Light Theme */
+body.light-theme {
+  background-color: #ffffff;
+  color: #111111;
+}
+
+body.light-theme header,
+body.light-theme footer {
+  background-color: #f0f0f0;
+  color: #111;
+}
+
+body.light-theme .category-card,
+body.light-theme .product-card {
+  background-color: #ffffff;
+  color: #111;
+}
+
+/* Dark Theme */
+body.dark-theme {
+  background-color: #111111;
+  color: #ffffff;
+}
+
+body.dark-theme header,
+body.dark-theme footer {
+  background-color: #222;
+  color: #fff;
+}
+
+body.dark-theme .category-card,
+body.dark-theme .product-card {
+  background-color: #1a1a1a;
+  color: #fff;
+}
+
+/* Icon styles */
+nav i,
+.category-card i,
+.product-card h4 i {
+  margin-right: 6px;
+  color: #f39c12;
+}
+
+/* Product card hover effect */
+.product-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.product-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+}
+
   
